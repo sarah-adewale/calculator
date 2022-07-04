@@ -58,11 +58,15 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background: #8B854B;
+}
+
 .clear-btn {
     background: #8B854B;
 }
 
-.reset-btn {
+.all-clear {
     background: #8E6565;
 }
 
