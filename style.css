@@ -75,3 +75,7 @@ button:hover {
     background: #467A48;
     /* flex: 2; */
 }
+
+value {
+    color: #fff;
+}
