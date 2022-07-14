@@ -35,19 +35,28 @@ const calculator = {
 
         switch(value){
             case '=':
+                this.calcAnswer(this.displayText)
                 //calculate the answer
                 break;
             case 'AC':
+                this.clearAll()
+                //clear screen and stored value
+                break;
+            case 'C':
+                this.clearAll()
                 //clear screen and stored value
                 break;
             case '.':
                 if(this.displayText == 0){
+                    this.addText('0.')
                     //pass '0' into add text method
                 }else{
+                    this.addText(value)
                     //add value to text string
                 }
                 break;
             default:
+                this.addText(value)
                 //add value to text string
                 break;
         }
@@ -61,10 +70,30 @@ const calculator = {
             this.displayText = this.prevTotal //add preivous value to new value
             this.prevTotal = null
         }
-        if(){ //prevent invalid values/input. if user entered invalid sequence, dont proceed
-
+        if(isNaN(+(value)) && isNaN(+(this.displayText))){ //prevent invalid values/input. if user entered invalid sequence, dont proceed
+            if(isNaN(this.displayText.slice(-1))){
+                return; //prevent user from typing two characters at a time
+            }
         }
         this.displayText += value
+        this.outputText(this.displayText)
         //output display to screen
+    },
+    outputText(text){ //output display to screen
+        document.querySelector('.calculator-screen').value = text
+    },
+
+    //do calculations
+    calcAnswer(equation){
+        //console.log(eval(equation))
+        let result = Function('return ' + equation)()
+        this.outputText(result)
+    },
+
+    clearAll(){
+        this.displayText = '0',
+        this.prevTotal = null,
+        this.outputText(this.displayText)
+
     }
 }
